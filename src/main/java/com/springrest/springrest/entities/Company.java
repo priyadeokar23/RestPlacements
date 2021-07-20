@@ -5,21 +5,16 @@ public class Company
 {
 
 	private int id;
-	private String Name;
-	private String roledes;
-	private int ctc;
-	private double cgpaCrit;
-	private String place;
+	private String name;
+	private String website;
+	private String description;
 	
-	public Company(int id, String name, String roledes, int ctc, double cgpa, String place) {
-		super();
-		this.Name = name;
-		this.roledes = roledes;
-		this.ctc = ctc;
-		this.cgpaCrit = cgpa;
-		this.place = place;
-	}
-
+//	private String roledes;
+//	private int ctc;
+//	private double cgpaCrit;
+//	private String place;
+	
+	
 	public Company()
 	{
 		super();
@@ -28,73 +23,68 @@ public class Company
 
 	
 
+public Company(int id, String name, String website, String description) {
+	
+	this.id = id;
+	this.name = name;
+	this.website = website;
+	this.description = description;
+}
+
+
+
+public int getId() {
+	return id;
+}
+
+
+
+public void setId(int id) {
+	this.id = id;
+}
+
+
+
+public String getName() {
+	return name;
+}
+
+
+
+public void setName(String name) {
+	name = name;
+}
+
+
+
+public String getWebsite() {
+	return website;
+}
+
+
+
+public void setWebsite(String website) {
+	this.website = website;
+}
+
+
+
+public String getDescription() {
+	return description;
+}
+
+
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+
+
 //	@Override
 //	public String toString() {
 //		return "Company [Name=" + Name + ", roledes=" + roledes + ", ctc=" + ctc + ", cgpaCrit=" + cgpaCrit + ", place="
 //				+ place + "]";
 //	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setCgpaCrit(double cgpaCrit) {
-		this.cgpaCrit = cgpaCrit;
-	}
-
-	public String getName() {
-		return Name;
-	}
-
-	@Override
-	public String toString() {
-		return "Company [id=" + id + ", Name=" + Name + ", roledes=" + roledes + ", ctc=" + ctc + ", cgpaCrit="
-				+ cgpaCrit + ", place=" + place + "]";
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
-	public String getRoledes() {
-		return roledes;
-	}
-
-	public void setRoledes(String roledes) {
-		this.roledes = roledes;
-	}
-
-	public int getCtc() {
-		return ctc;
-	}
-
-	public void setCtc(int ctc) {
-		this.ctc = ctc;
-	}
-
-	public double getCgpaCrit() {
-		return cgpaCrit;
-	}
-
-	public void setCgpaCrit(float cgpaCrit) {
-		this.cgpaCrit = cgpaCrit;
-	}
-
-	public String getPlace() {
-		return place;
-	}
-
-	public void setPlace(String place) {
-		this.place = place;
-	}
-	
-	
-	
-	
-	
-	
 }
+	
