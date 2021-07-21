@@ -38,27 +38,18 @@ public class CompanyServiceimpl implements CompanyService {
 
 	public List<Company> getCompanies() 
 	{
-		// TODO Auto-generated method stub
 		String query = "SELECT * FROM company;";
 		
-//		List<Company> users1 = template.query(query, new RowMapper<Company>() {
-//
-//			@Override
-//			public Company mapRow(ResultSet rs, int rowNum) throws SQLException {
-//				return new user(rs.getInt(1), rs.getString(2), rs.getString(3));
-//			}});
-//		
-		List<Company> users = template.query(query, new RowMapper() {
+		List<Company> companies = template.query(query, new RowMapper<Company>() {
 
 			@Override
-			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+			public Company mapRow(ResultSet rs, int rowNum) throws SQLException {
 				// TODO Auto-generated method stub
 				return new Company (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 			}
 		});
 		
-		return users;
-//		return list;
+		return companies;
 	}
 
 	@Override

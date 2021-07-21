@@ -19,8 +19,7 @@ import com.springrest.springrest.services.CompanyService;
 @RestController
 public class MyController
 {
-	@Autowired
-	
+	@Autowired	
 	private CompanyService companyService;
 	
 	
@@ -28,21 +27,18 @@ public class MyController
 	@GetMapping("/home")
 	public String home()
 	{
-		return "Wlcome to Company Management System";
+		return "Welcome to Company Management System";
 	}
 	
-	//Get the Companies
-	
+	//Get the Companies	
 	@GetMapping("/Companies")
 	public List<Company> getCompanies()
 	{
-//		return null;
 		return this.companyService.getCompanies();
 		
 	}
 	
-	//Get Single Company
-	
+	//Get Single Company	
 	@GetMapping ("/Companies/{CompanyID}")
 	public Company getCompany(@PathVariable String CompanyID)
 	{
