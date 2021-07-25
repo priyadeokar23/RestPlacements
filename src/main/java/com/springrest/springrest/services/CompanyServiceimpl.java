@@ -2,6 +2,7 @@ package com.springrest.springrest.services;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -12,10 +13,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.springrest.springrest.entities.Company;
+import com.springrest.springrest.entities.user;
 
 import org.springframework.jdbc.core.RowMapper;
-
-
 
 @Service
 public class CompanyServiceimpl implements CompanyService {
@@ -53,46 +53,150 @@ public class CompanyServiceimpl implements CompanyService {
 	}
 
 	@Override
-	public Company getCompany(long CompanyID) {
-		// TODO Auto-generated method stub
+	public Company getById(int CompanyID) {
 		
-		Company c=null;
 		
-		for(Company company:list)
-		{
-			if(company.getId()==CompanyID)
-			{
-				c=company;
-				break;
+		String query = "select * from Company where id=?;";
+		
+		//see above note for errors
+		Company User = template.queryForObject(query, new RowMapper<Company>() {
+			
+			@Override
+			public Company mapRow(ResultSet rs, int arg1) throws SQLException {
+				return new Company(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 			}
-		}
-		return c;
+		}, CompanyID );	
+					
+		
+		return User;
 	}
-
-
-
-
+	
+	
+	@Override
+	public int addCompany(Company User) {
+		String query = "insert into Company values(id,c_name,website, description) values(?,?,?.?);";
+		
+		int added = template.update(
+				query,
+				User.getId(),
+				User.getName(),
+				User.getWebsite(),
+				User.getDescription()
+		);
+		return added;
+	}
+	
+	@Override
+	public int update(Company User) {
+		
+		String query = "update Company set id=?, name = ?, website =?, desceription =? where userid=?;";
+		
+		Object[] params = {User.getId(), User.getName(), User.getWebsite(), User.getDescription() };
+		
+		int[] types = {Types.INTEGER,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR};
+		
+		int updated = template.update(
+				query,
+				params,
+				types
+				
+		);
+		
+		return updated;
+	}
+	
+	
+	
 
 	@Override
-	public Company addCompany(Company company) {
-		// TODO Auto-generated method stub
-		list.add(company);
-		return company;
+	public int deleteById(int CompanyID, Company User) {
+		String query = "delete from Company where id=?;";
+		
+		int deleted = template.update(query, User.getId());
+		return deleted;
 	}
 
-
-
-
-
 	@Override
-	public Company updateCompany(Company company) {
+	public Company getCompanybyName(long CompanyName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+//	@Override
+//	public Company getCompanybyName(long CompanyName) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public int deleteById(int id, user u) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
+//	@Override
+//	public Company getCompanybyName(long CompanyName) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public int deleteById(int id, user u) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
+//	@Override
+//	public Company updateCompany(Company company) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	@Override
+//	public Company getCompanybyName(long CompanyName) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	@Override
+//	public Company deleteCompany(long CompanyId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+//	@Override
+//	public Company deleteCompanybyName(long CompanyName) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+////	@Override
+//	public Company deleteCompany(int CompanyID) {
+//		Company c = new Company();
+//	    CompanyService.removeIf(c.CompanyID ->c.CompanyID.getId().equals(CompanyID));
+//	}
+	
+	
+	//@Override
+	//public user updateUser(long u_id) 
+	//{
+		// TODO Auto-generated method stub
+	//	return null;
+	//}
 
 //	@Override
 //	public Company getCompany(long CompanyId) {
@@ -100,6 +204,24 @@ public class CompanyServiceimpl implements CompanyService {
 //		return null;
 //	}
 
+	//private void deleteBook(@PathVariable("bookid") int bookid)   
+    //{  
+	//booksService.delete(bookid);  
+	//}
+	
+	//public void updatePost(String id, Post post) {
+
+	  //  for(int i = 0; i < posts.size(); i++) {
+
+		//Post p = posts.get(i);
+
+		//if(p.equals(post)) {
+
+		  //   posts.set(i, post);
+		//}
+	  //  }
+	//}
+	
 }
 
 
