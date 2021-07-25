@@ -4,13 +4,14 @@ import java.util.List;
 import com.springrest.springrest.entities.Company;
 public interface CompanyService {
 	
-	public List<Company> getCompanies();
+	public List<Company> 	getCompanies();	
+	public Company 			getCompany(long companyId);	
 	
-	public Company addCompany(Company company);
+	public int 				addCompany(Company company);
 
-	public Company updateCompany(Company company);
+	public int 				updateCompany(Company company);
 	
-	public Company getCompany(long CompanyId);
+	public int				deleteCompany(Company company);
 	
 	
 	

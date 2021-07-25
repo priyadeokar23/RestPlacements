@@ -17,14 +17,12 @@ import com.springrest.springrest.entities.Company;
 import com.springrest.springrest.services.CompanyService;
 
 @RestController
-public class MyController
+public class CompanyController
 {
 	@Autowired	
-	private CompanyService companyService;
-	
-	
+	private CompanyService companyService;	
 
-	@GetMapping("/home")
+	@GetMapping("/test")
 	public String home()
 	{
 		return "Welcome to Company Management System";
@@ -50,15 +48,24 @@ public class MyController
 	@PostMapping("/Companies")
 	public Company addCompany(@RequestBody Company company)
 	{
-		return this.companyService.addCompany(company);
+		int added = companyService.addCompany(company);
+		if(added>0) {
+			return company;
+		}		
+		return new Company();
 		
 	}
 	
 	@PutMapping("/Companies")
-	public Company updateCompany(@RequestBody Company company)
+	public int updateCompany(@RequestBody Company company)
 	{
 		return this.companyService.updateCompany(company);
 		
+	}
+	
+	public int deleteCompany(@RequestBody Company company) {
+		int deleted = this.companyService.deleteCompany(company);
+		return deleted;
 	}
 
 	
