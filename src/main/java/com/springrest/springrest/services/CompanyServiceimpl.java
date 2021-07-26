@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.springrest.springrest.entities.Company;
+import com.springrest.springrest.entities.user;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -57,9 +58,10 @@ public class CompanyServiceimpl implements CompanyService {
 		String query = "insert into company (id, name, website, description) values(?,?,?);";
 
 		int added = template.update(query, company.getId(), company.getName(), company.getWebsite(), company.getDescription());
-		return added;
-	}
 
+	return added;
+  }
+	
 	@Override
 	public int updateCompany(Company company) {
 		String query = "update company set name=?, website = ?, description = ? where userid=?;";
@@ -79,6 +81,6 @@ public class CompanyServiceimpl implements CompanyService {
 
 		int deleted = template.update(query, company.getId());
 		return deleted;
-	}
-
+  }
+	
 }

@@ -4,6 +4,7 @@ import java.util.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +18,12 @@ import com.springrest.springrest.entities.Company;
 import com.springrest.springrest.services.CompanyService;
 
 @RestController
-public class CompanyController
-{
-	@Autowired	
-	private CompanyService companyService;	
-
-	@GetMapping("/test")
-	public String home()
+public class CompanyController {
+	@Autowired
+  private CompanyService companyService;
+  
+	@GetMapping("/home")
+  public String home()
 	{
 		return "Welcome to Company Management System";
 	}
@@ -68,6 +68,34 @@ public class CompanyController
 		return deleted;
 	}
 
+=======
+	//Get company by Id
+	@GetMapping("/Company/{CompanyID}")
+	public Company getbyid(@PathVariable int CompanyID)
+		{
+			Company C_ID = companyService.getById(CompanyID);
+			return C_ID;
+		}
+	
+	@PostMapping("/add")
+	public Company AddCompany(@RequestBody Company c) {	
+		int added = companyService.addCompany(c);
+		if(added>0) {
+			return c;
+		}		
+		return new Company();
+	}
+	
+	@PutMapping("/updateUser")
+	public int updateCompany(@RequestBody Company c) {
+		
+		return companyService.update(c);
+	}
+	
+	@DeleteMapping("/delete/{CompanyID}")
+	public int deleteUser(@PathVariable int CompanyID, @RequestBody Company c) {
+		return companyService.deleteById(CompanyID, c);
+	}
 	
 }
 
