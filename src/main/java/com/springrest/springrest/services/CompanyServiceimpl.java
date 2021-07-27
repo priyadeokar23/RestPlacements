@@ -22,6 +22,8 @@ public class CompanyServiceimpl implements CompanyService {
 	@Autowired
 	JdbcTemplate template;
 
+	//working
+	@Override
 	public List<Company> getCompanies() {
 		String query = "SELECT * FROM company;";
 
@@ -36,15 +38,16 @@ public class CompanyServiceimpl implements CompanyService {
 		return companies;
 	}
 
+	//working
 	@Override
-	public Company getCompany(long CompanyID) {
+	public Company getCompany(int CompanyID) {
 
-		String query = "select * from company where name=?;";
+		String query = "select * from company where id=?;";
 
 		Company c = template.queryForObject(query, new RowMapper<Company>() {
 
 			@Override
-			public Company mapRow(ResultSet rs, int rowNum) throws SQLException {
+			public Company mapRow(ResultSet rs, int arg1) throws SQLException {
 				return new Company(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 			}
 		}, CompanyID);
@@ -52,17 +55,19 @@ public class CompanyServiceimpl implements CompanyService {
 		return c;
 	}
 
+	//working
 	@Override
 	public int addCompany(Company company) {
-		String query = "insert into company (id, name, website, description) values(?,?,?);";
+		String query = "insert into company (id, name, website, description) values(?,?,?,?);";
 
 		int added = template.update(query, company.getId(), company.getName(), company.getWebsite(), company.getDescription());
 		return added;
 	}
 
+	//working
 	@Override
 	public int updateCompany(Company company) {
-		String query = "update company set name=?, website = ?, description = ? where userid=?;";
+		String query = "update company set name=?, website = ?, description = ? where id=?;";
 
 		Object[] params = { company.getName(), company.getWebsite(), company.getDescription(), company.getId() };
 
@@ -73,11 +78,13 @@ public class CompanyServiceimpl implements CompanyService {
 		return updated;
 	}
 
+	//working
 	@Override
-	public int deleteCompany(Company company) {
-		String query = "delete from company where userid=?;";
+	public int deleteCompany(int id) {
+		
+		String query = "delete from company where id=?;";
 
-		int deleted = template.update(query, company.getId());
+		int deleted = template.update(query, id);
 		return deleted;
 	}
 

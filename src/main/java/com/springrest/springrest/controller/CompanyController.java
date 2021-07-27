@@ -4,6 +4,7 @@ import java.util.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,30 +23,31 @@ public class CompanyController
 	@Autowired	
 	private CompanyService companyService;	
 
+	//working
 	@GetMapping("/test")
 	public String home()
 	{
 		return "Welcome to Company Management System";
 	}
 	
-	//Get the Companies	
-	@GetMapping("/Companies")
+	//working
+	@GetMapping("/companies")
 	public List<Company> getCompanies()
 	{
 		return this.companyService.getCompanies();
 		
 	}
 	
-	//Get Single Company	
-	@GetMapping ("/Companies/{CompanyID}")
-	public Company getCompany(@PathVariable String CompanyID)
+	//working	
+	@GetMapping ("/companies/{CompanyID}")
+	public Company getCompany(@PathVariable int CompanyID)
 	{
-		return this.companyService.getCompany(Long.parseLong(CompanyID));
+		return this.companyService.getCompany(CompanyID);
 	}
 	
 	
-	// Add Company
-	@PostMapping("/Companies")
+	//working
+	@PostMapping("/companies")
 	public Company addCompany(@RequestBody Company company)
 	{
 		int added = companyService.addCompany(company);
@@ -56,15 +58,17 @@ public class CompanyController
 		
 	}
 	
-	@PutMapping("/Companies")
+	//working
+	@PutMapping("/companies")
 	public int updateCompany(@RequestBody Company company)
 	{
-		return this.companyService.updateCompany(company);
-		
+		return this.companyService.updateCompany(company);		
 	}
 	
-	public int deleteCompany(@RequestBody Company company) {
-		int deleted = this.companyService.deleteCompany(company);
+	//working
+	@DeleteMapping("/companies/{id}")
+	public int deleteCompany(@PathVariable int id) {
+		int deleted = this.companyService.deleteCompany(id);
 		return deleted;
 	}
 
